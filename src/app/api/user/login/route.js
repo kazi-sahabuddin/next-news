@@ -5,8 +5,11 @@ import { CreateToken } from "@/utility/JWTTokenHelper";
 export async function POST(req, res) {
   try {
     let reqBody = await req.json();
+    consol.log(reqBody);
+    console.log("hello");
     const prisma = new PrismaClient();
     const result = await prisma.users.findUnique({ where: reqBody });
+    console.log(result);
 
     if (result.length === 0) {
       return NextResponse.json({ status: "fail", data: result });
@@ -23,6 +26,7 @@ export async function POST(req, res) {
       );
     }
   } catch (e) {
+    //console.log("Hello Error");
     return NextResponse.json({ status: "fail", data: e });
   }
 }
